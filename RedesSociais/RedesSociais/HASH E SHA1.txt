@@ -1,0 +1,10 @@
+
+HASH facebook
+"C:\Program Files\Java\jdk1.8.0_171\bin\keytool.exe" -exportcert -alias androiddebugkey -keystore "C:\Users\MOBRJ\AppData\Local\Xamarin\Mono for Android\debug.keystore" | "C:\OpenSSL\bin\openssl.exe" sha1 -binary | "C:\OpenSSL\bin\openssl.exe" base64
+
+SHA1 Google
+1 - CD C:\Program Files\Java\jdk1.8.0_171\bin
+keytool.exe -list -v -keystore "C:\Users\MOBRJ\AppData\Local\Xamarin\Mono for Android\debug.keystore" -alias androiddebugkey -storepass android -keypass android
+
+SITE GOOGLE
+https://console.developers.google.com/apis/credentials/consent?project=loginredesociais-7b218&folder&organizationId&duration=P1D
