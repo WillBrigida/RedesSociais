@@ -53,6 +53,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xamarin.Facebook.Android">
+      <Version>5.0.3</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
@@ -70,6 +73,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\FacebookService.cs" />
     <Compile Include="Services\GoogleService.cs" />
   </ItemGroup>
   <ItemGroup>

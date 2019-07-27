@@ -11,7 +11,7 @@ namespace RedesSociais
         {
             InitializeComponent();
 
-            MainPage = new GooglePage();
+            MainPage = new FacebookPage();
         }
 
         protected override void OnStart()
