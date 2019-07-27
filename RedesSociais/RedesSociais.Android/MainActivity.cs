@@ -37,19 +37,19 @@ namespace RedesSociais.Droid
             base.OnActivityResult(requestCode, resultCode, data);
 
             #region FacebookService
-            //var manager = DependencyService.Get<IFacebookService>();
-            //if (manager != null)
-            //{
-            //    (manager as FacebookService).CallbackManager.OnActivityResult(requestCode, (int)resultCode, data);
-            //    return;
-            //}
+            var manager = DependencyService.Get<IFacebookService>();
+            if (manager != null)
+            {
+                (manager as FacebookService).CallbackManager.OnActivityResult(requestCode, (int)resultCode, data);
+                return;
+            }
             #endregion
 
-            if (requestCode == 1)
-            {
-                GoogleSignInResult result = Auth.GoogleSignInApi.GetSignInResultFromIntent(data);
-                GoogleService.Instance.OnAuthCompleted(result);
-            }
+            //if (requestCode == 1)
+            //{
+            //    GoogleSignInResult result = Auth.GoogleSignInApi.GetSignInResultFromIntent(data);
+            //    GoogleService.Instance.OnAuthCompleted(result);
+            //}
         }
     }
 }

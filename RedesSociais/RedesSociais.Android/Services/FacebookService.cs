@@ -18,7 +18,7 @@ namespace RedesSociais.Droid.Services
     {
         public ICallbackManager CallbackManager;
 
-        Action<FacebookUser, System.Exception> _onLoginComplete;
+        Action<FacebookUser, string> _onLoginComplete;
 
         public FacebookService()
         {
@@ -27,7 +27,7 @@ namespace RedesSociais.Droid.Services
         }
 
         #region IFacebookManager
-        public void Login(Action<FacebookUser, System.Exception> OnLoginComplete)
+        public void Login(Action<FacebookUser, string> OnLoginComplete)
         {
             _onLoginComplete = OnLoginComplete;
             LoginManager.Instance.SetLoginBehavior(LoginBehavior.NativeWithFallback);
@@ -43,12 +43,12 @@ namespace RedesSociais.Droid.Services
         #region IFacebookCallback
         public void OnCancel()
         {
-            _onLoginComplete?.Invoke(null, new System.Exception("Login Canceled."));
+            _onLoginComplete?.Invoke(null, new string("Login Canceled."));
         }
 
         public void OnError(FacebookException error)
         {
-            _onLoginComplete?.Invoke(null, new System.Exception(error.LocalizedMessage));
+            _onLoginComplete?.Invoke(null, new string(error.LocalizedMessage));
         }
 
         public void OnSuccess(Java.Lang.Object result)

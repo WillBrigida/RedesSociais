@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Facebook.LoginKit;
 using Foundation;
+using RedesSociais.iOS.Services;
 using RedesSociais.Models;
 using RedesSociais.Services;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using UIKit;
+using Xamarin.Forms;
 
+[assembly: Dependency(typeof(FacebookService))]
 namespace RedesSociais.iOS.Services
 {
-    public class FacebookManager : IFacebookService
+    public class FacebookService : IFacebookService
     {
         public Action<FacebookUser, string> _onLoginComplete;
+
 
         public void Login(Action<FacebookUser, string> onLoginComplete)
         {
@@ -111,6 +114,7 @@ namespace RedesSociais.iOS.Services
                 }
             });
         }
+
 
         public void Logout()
         {
