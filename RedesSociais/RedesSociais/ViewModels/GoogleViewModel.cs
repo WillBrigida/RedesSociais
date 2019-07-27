@@ -1,8 +1,5 @@
 ﻿using RedesSociais.Models;
 using RedesSociais.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -13,7 +10,6 @@ namespace RedesSociais.ViewModels
         #region ATRIBUTOS & PROPRIEDADES
 
         private bool _isLogedIn;
-
         public bool IsLogedIn
         {
             get { return _isLogedIn; }

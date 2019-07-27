@@ -14,21 +14,21 @@ namespace RedesSociais.ViewModels
         public FacebookUser FacebookUser
         {
             get { return _facebookUser; }
-            set { _facebookUser = value; }
+            set {SetProperty(ref _facebookUser , value); }
         }
 
         private bool _isLoggedIn;
         public bool IsLoggedIn
         {
             get { return _isLoggedIn; }
-            set { _isLoggedIn = value; }
+            set {SetProperty(ref _isLoggedIn , value); }
         }
 
         readonly IFacebookService _facebookService;
 
         public FacebookViewModel()
         {
-            // _facebookService = DependencyService.Get<IFacebookService>();
+             _facebookService = DependencyService.Get<IFacebookService>();
         }
 
         public ICommand FacebookLoginCommand => new Command (FacebookLogin);
@@ -52,11 +52,11 @@ namespace RedesSociais.ViewModels
 
         private void FacebookLogin()
         {
-            DependencyService.Get<IFacebookService>()?.Login(OnLoginCompleted);
+            _facebookService?.Login(OnLoginCompleted);
         }
         private void FacebookLogout()
         {
-            DependencyService.Get<IFacebookService>()?.Logout();
+            _facebookService?.Logout();
             IsLoggedIn = false;
         }
 
@@ -66,7 +66,6 @@ namespace RedesSociais.ViewModels
             {
                 FacebookUser = facebookUser;
                 IsLoggedIn = true;
-                App.Current.MainPage.DisplayAlert("Resposta da API", $"Nome: {facebookUser.FirstName}\n {facebookUser.Id}", "OK");
             }
             else
             {
