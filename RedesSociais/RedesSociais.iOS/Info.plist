@@ -32,5 +32,28 @@
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>RedesSociais</string>
+	</array>
+		<key>UILaunchStoryboardName</key>
+		<string>LaunchScreen</string>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>487481395345453</string>
+				</array>
+			</dict>
+		</array>
+		<key>FacebookAppID</key>
+		<string>487481395345453</string>
+		<key>FacebookDisplayName</key>
+		<string>xamarinauthentication</string>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>fbapi</string>
+			<string>fb-messenger-api</string>
+			<string>fbauth2</string>
+			<string>fbshareextension</string>
+		</array>
 </dict>
 </plist>
