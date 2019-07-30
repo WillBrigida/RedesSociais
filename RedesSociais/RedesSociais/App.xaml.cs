@@ -10,8 +10,10 @@ namespace RedesSociais
         public App()
         {
             InitializeComponent();
-
-            MainPage = new FacebookPage();
+#if DEBUG
+            HotReloader.Current.Run(this);
+#endif
+            MainPage = new NavigationPage(new FacebookPage());
         }
 
         protected override void OnStart()

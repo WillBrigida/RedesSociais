@@ -38,7 +38,6 @@ namespace RedesSociais.ViewModels
         {
             if (facebookUser != null)
             {
-                FacebookUser = facebookUser;
                 IsLoggedIn = true;
             }
             else
@@ -51,6 +50,7 @@ namespace RedesSociais.ViewModels
         {
             _facebookService?.Login(OnLoginCompleted);
         }
+
         private void FacebookLogout()
         {
             _facebookService?.Logout();

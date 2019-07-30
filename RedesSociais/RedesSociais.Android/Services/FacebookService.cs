@@ -8,7 +8,7 @@ using Org.Json;
 using Xamarin.Facebook;
 using Xamarin.Facebook.Login;
 using Xamarin.Forms;
-
+using RedesSociais.Views;
 
 [assembly: Dependency(typeof(FacebookService))]
 
@@ -61,6 +61,7 @@ namespace RedesSociais.Droid.Services
                 bundle.PutString("fields", "id, first_name, email, last_name, picture.width(500).height(500)");
                 request.Parameters = bundle;
                 request.ExecuteAsync();
+                App.Current.MainPage.Navigation.PushAsync(new MainPage());
             }
         }
         #endregion

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:RedesSociais.Controls"
+    xmlns:converters="clr-namespace:RedesSociais.Converters"
+    mc:Ignorable="d"
+    x:Class="RedesSociais.Views.LoginPage"
+    Visual="Material">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <controls:KeyboardView
+        Padding="0,60,0,0"
+        VerticalOptions="FillAndExpand"
+        >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--<Image 
+        Source="ic_test"
+        HeightRequest="80"
+        WidthRequest="80"
+        HorizontalOptions="CenterAndExpand"
+        Grid.Row="0"
+        />-->
+
+        <Label 
+            Text="Login"
+            FontAttributes="Bold"
+            TextColor="CornflowerBlue"
+            HorizontalOptions="CenterAndExpand"
+            FontSize="25"
+            VerticalOptions="Center"
+            Margin="0,20,0,0"
+            Grid.Row="1"
+            x:Name="welcomeText"
+        />
+
+
+        <Entry 
+            Focused="Login_Focused"
+            Unfocused="Login_Focused"
+            x:Name="Login"
+            Placeholder="Email"
+            Grid.Row="2"
+            Margin="20,0" 
+            ReturnCommand="{Binding OnLoginCommand}"
+            ReturnType="Done"
+            Keyboard="Email"
+        />
+
+        <Entry 
+            Unfocused="Senha_Focused"
+            Focused="Senha_Focused"
+            x:Name="Senha"
+            Placeholder="Senha"
+            Margin="20,0" 
+            Grid.Row="3"
+            HeightRequest="50"
+            ReturnCommand="{Binding OnLoginCommand}"
+            ReturnType="Done"
+            IsPassword="true"
+        />
+
+        <Grid
+            Margin="0"
+            VerticalOptions="EndAndExpand"
+            RowSpacing="1"
+            ColumnSpacing="1"
+            Grid.Row="4"
+            >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button 
+                Grid.ColumnSpan="2"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="MediumSeaGreen"
+                HeightRequest="50"
+                TextColor="White"
+                CornerRadius="0"
+                Text="Login"
+            />
+            
+            <Button 
+                Padding="7,0,0,0"
+                x:Name="FacebookButton"
+                Grid.Column="0"
+                Grid.Row="1"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="#3b5998"
+                HeightRequest="50"
+                TextColor="White"
+                CornerRadius="0"
+                Text="Facebook"
+                Command="{Binding FacebookLoginCommand}"
+                IsVisible="{Binding IsLoggedIn, Converter={StaticResource InvertBooleanConverter}, Mode=TwoWay}"
+            />
+
+            <Button 
+                Padding="0"
+                x:Name="GoogleButton"
+                Grid.Column="1"
+                Grid.Row="1"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="#CC3333"
+                HeightRequest="50"
+                TextColor="White"
+                CornerRadius="0"
+                Text="Google"
+                Command="{Binding GoogleLoginCommand}"
+                IsVisible="{Binding IsLogedIn, Converter={StaticResource InvertBooleanConverter}, Mode=TwoWay}"
+            />
+
+        </Grid>
+            
+    </controls:KeyboardView>
+     
+</ContentPage>
