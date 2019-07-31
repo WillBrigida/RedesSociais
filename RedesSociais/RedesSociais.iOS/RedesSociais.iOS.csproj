@@ -63,6 +63,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Services\FacebookServices.cs" />
+    <Compile Include="Services\GoogleService.cs" />
     <None Include="Entitlements.plist" />
     <None Include="GoogleService-Info.plist" />
     <None Include="Info.plist" />
