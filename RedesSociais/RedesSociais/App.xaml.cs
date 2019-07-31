@@ -13,7 +13,7 @@ namespace RedesSociais
 #if DEBUG
             HotReloader.Current.Run(this);
 #endif
-            MainPage = new NavigationPage(new FacebookPage());
+            MainPage = new NavigationPage(new GooglePage());
         }
 
         protected override void OnStart()

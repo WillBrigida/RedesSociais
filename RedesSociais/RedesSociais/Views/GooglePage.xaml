@@ -17,7 +17,8 @@
     <ContentPage.Content>
 
         <ScrollView>
-            <StackLayout>
+            <StackLayout
+                VerticalOptions="Center">
 
                 <Button 
                     Text="Google Login" 

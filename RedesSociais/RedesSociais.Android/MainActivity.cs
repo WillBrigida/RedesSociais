@@ -41,15 +41,14 @@ namespace RedesSociais.Droid
             if (manager != null)
             {
                 (manager as FacebookService).CallbackManager.OnActivityResult(requestCode, (int)resultCode, data);
-                return;
             }
             #endregion
 
-            //if (requestCode == 1)
-            //{
-            //    GoogleSignInResult result = Auth.GoogleSignInApi.GetSignInResultFromIntent(data);
-            //    GoogleService.Instance.OnAuthCompleted(result);
-            //}
+            if (requestCode == 1)
+            {
+                GoogleSignInResult result = Auth.GoogleSignInApi.GetSignInResultFromIntent(data);
+                GoogleService.Instance.OnAuthCompleted(result);
+            }
         }
     }
 }

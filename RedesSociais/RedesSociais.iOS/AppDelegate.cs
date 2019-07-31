@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Facebook.CoreKit;
 using Foundation;
+using Google.SignIn;
 using UIKit;
 
 namespace RedesSociais.iOS
@@ -25,6 +26,9 @@ namespace RedesSociais.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+            var googleServiceDictionary = NSDictionary.FromFile("GoogleService-Info.plist");
+            SignIn.SharedInstance.ClientID = googleServiceDictionary["851135984655-d9u8qatnav0vs0u79ctaguudodqcs7jd.apps.googleusercontent.com"].ToString();
+
             return base.FinishedLaunching(app, options);
         }
         public override void OnActivated(UIApplication uiApplication)
@@ -37,6 +41,12 @@ namespace RedesSociais.iOS
         {
             //return base.OpenUrl(application, url, sourceApplication, annotation);
             return ApplicationDelegate.SharedInstance.OpenUrl(application, url, sourceApplication, annotation);
+        }
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            var openUrlOptions = new UIApplicationOpenUrlOptions(options);
+            return SignIn.SharedInstance.HandleUrl(url, openUrlOptions.SourceApplication, openUrlOptions.Annotation);
         }
     }
 }
