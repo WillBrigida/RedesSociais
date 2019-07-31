@@ -34,21 +34,11 @@ namespace RedesSociais.ViewModels
         public ICommand FacebookLoginCommand => new Command (FacebookLogin);
         public ICommand FacebookLogoutCommand => new Command(FacebookLogout);
 
-        private void OnLoginComplete(FacebookUser facebookUser, string message)
-        {
-            if (facebookUser != null)
-            {
-                IsLoggedIn = true;
-            }
-            else
-            {
-                App.Current.MainPage.DisplayAlert("Error", message, "Ok");
-            }
-        }
+       
 
         private void FacebookLogin()
         {
-            _facebookService?.Login(OnLoginCompleted);
+            _facebookService?.Login(OnLoginComplete);
         }
 
         private void FacebookLogout()
@@ -57,9 +47,9 @@ namespace RedesSociais.ViewModels
             IsLoggedIn = false;
         }
 
-        private void OnLoginCompleted(FacebookUser facebookUser, string exception)
+        private void OnLoginComplete(FacebookUser facebookUser, string exception)
         {
-            if (exception == null)
+            if (string.IsNullOrEmpty(exception))
             {
                 FacebookUser = facebookUser;
                 IsLoggedIn = true;
