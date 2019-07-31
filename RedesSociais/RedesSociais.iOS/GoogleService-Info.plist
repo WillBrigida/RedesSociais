@@ -3,12 +3,34 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>851135984655-d9u8qatnav0vs0u79ctaguudodqcs7jd.apps.googleusercontent.com</string>
+	<string>1035348151202-ist1bhvl0mma1e36s4s5nje8eis5i79o.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.851135984655-d9u8qatnav0vs0u79ctaguudodqcs7jd</string>
+	<string>com.googleusercontent.apps.1035348151202-ist1bhvl0mma1e36s4s5nje8eis5i79o</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA5KKSG5g3cuG1N2bl6ZABlzFSHogqTjp4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1035348151202</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.companyname.RedesSociais</string>
+	<key>PROJECT_ID</key>
+	<string>redessociais-250cc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>redessociais-250cc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1035348151202:ios:ada10735b9788e94</string>
+	<key>DATABASE_URL</key>
+	<string>https://redessociais-250cc.firebaseio.com</string>
 </dict>
 </plist>

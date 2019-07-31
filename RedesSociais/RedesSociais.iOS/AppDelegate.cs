@@ -27,7 +27,7 @@ namespace RedesSociais.iOS
             LoadApplication(new App());
 
             var googleServiceDictionary = NSDictionary.FromFile("GoogleService-Info.plist");
-            SignIn.SharedInstance.ClientID = googleServiceDictionary["851135984655-d9u8qatnav0vs0u79ctaguudodqcs7jd.apps.googleusercontent.com"].ToString();
+            SignIn.SharedInstance.ClientID = googleServiceDictionary["CLIENT_ID"].ToString();
 
             return base.FinishedLaunching(app, options);
         }
