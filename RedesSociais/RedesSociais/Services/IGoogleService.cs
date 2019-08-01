@@ -7,7 +7,7 @@ namespace RedesSociais.Services
 {
     public interface IGoogleService
     {
-        void Login(Action<GoogleUser, string> OnLoginComplete);
+        void Login(Action<Users, string> OnLoginComplete);
         void Logout();
     }
 }

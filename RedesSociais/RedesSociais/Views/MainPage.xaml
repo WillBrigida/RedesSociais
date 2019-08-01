@@ -1,60 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="RedesSociais.Views.MainPage">
-    <ContentPage.Content>
-        <StackLayout 
-                HorizontalOptions="Center"
-			    VerticalOptions="Center"
-			    Margin="20"
-                >
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="clr-namespace:RedesSociais.Converters"
+    mc:Ignorable="d"
+    x:Class="RedesSociais.Views.MainPage"
+    Title="Main">
 
-            <Label 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            
+            <StackLayout 
+            HorizontalOptions="Center"
+			VerticalOptions="Center"
+			Margin="20"
+            >
+
+                <Label 
                     Text="{Binding Message}" 
 				    VerticalOptions="CenterAndExpand" 
 				    HorizontalOptions="CenterAndExpand" 
                 />
 
-          
-
-            <Button 
+                <Button 
                     Text="Logout"
 			        Command="{Binding FacebookLogoutCommand}"
 			        IsVisible="{Binding IsLoggedIn}"
                 />
 
-            <Image 
-                    Source="{Binding FacebookUser.Picture}"
+                <Image 
+                    Source="{Binding Users.Picture}"
+                    IsVisible="{Binding IsLoggedIn}"
                 />
 
-            <Label 
-                    Text="{Binding FacebookUser.Id, StringFormat='Id: {0}'}"
+                <Image 
+                    Source="{Binding Users.Pic}"
+                    IsVisible="{Binding IsLoggedIn}"
+                />
+
+                <Label 
+                    Text="{Binding Users.Id, StringFormat='Id: {0}'}"
+                    IsVisible="{Binding IsLoggedIn}"
+                />
+
+                <Label 
+                    Text="{Binding Users.Token, StringFormat='Token: {0}'}"
 				    IsVisible="{Binding IsLoggedIn}"
                 />
 
-            <Label 
-                    Text="{Binding FacebookUser.Token, StringFormat='Token: {0}'}"
+                <Label 
+                    Text="{Binding Users.FirstName, StringFormat='FirstName: {0}'}"
 				    IsVisible="{Binding IsLoggedIn}"
                 />
 
-            <Label 
-                    Text="{Binding FacebookUser.FirstName, StringFormat='FirstName: {0}'}"
+                <Label 
+                    Text="{Binding Users.LastName, StringFormat='Last Name: {0}'}"
 				    IsVisible="{Binding IsLoggedIn}"
                 />
 
-            <Label 
-                    Text="{Binding FacebookUser.LastName, StringFormat='Last Name: {0}'}"
+                <Label 
+                    Text="{Binding Users.Email, StringFormat='Email: {0}'}"
 				    IsVisible="{Binding IsLoggedIn}"
                 />
 
-            <Label 
-                    Text="{Binding FacebookUser.Email, StringFormat='Email: {0}'}"
-				    IsVisible="{Binding IsLoggedIn}"
-                />
-
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        
     </ContentPage.Content>
 </ContentPage>

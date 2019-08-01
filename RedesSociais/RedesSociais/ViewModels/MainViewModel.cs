@@ -1,7 +1,7 @@
 ﻿using RedesSociais.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using RedesSociais.Services;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace RedesSociais.ViewModels
 {
@@ -9,57 +9,69 @@ namespace RedesSociais.ViewModels
     {
         #region ATRIBUTOS & PROPRIEDADES
         private Users _users;
-
         public Users Users
         {
             get { return _users; }
             set { SetProperty(ref _users, value); }
         }
 
-        private static Users _user;
-
-        public static Users MyProperty
+        private string _teste;
+        public string Teste
         {
-            get { return _user; }
-            set { _user = value; }
+            get { return _teste; }
+            set {SetProperty(ref _teste , value); }
         }
 
-
         private FacebookUser _facebookUser;
-
         public FacebookUser FacebookUser
         {
             get { return _facebookUser; }
             set { SetProperty(ref _facebookUser, value); }
         }
         #endregion
+
+        #region VARIÁVEIS GLOBAIS
+        readonly IGoogleService _googleService;
+        readonly IFacebookService _facebookService;
+        #endregion
+
+        #region CONSTRUTOR
         public MainViewModel()
         {
+            _googleService = DependencyService.Get<IGoogleService>();
+            _facebookService = DependencyService.Get<IFacebookService>();
             Init();
         }
+        #endregion
 
+        #region COMMANDS
+        public ICommand GoogleLogoutCommand => new Command(OnGoogleLogout);
+        public ICommand FacebookLogoutCommand => new Command(FacebookLogout);
+        #endregion
+
+        #region MÉTODOS
         private void Init()
         {
-            if (this.FacebookUser != null)
+            MessagingCenter.Subscribe<Users>(this, "login", message =>
             {
-                //FacebookUser = this.Users;
-
-            }
+                Users = message;
+                IsLoggedIn = true;
+            });
         }
 
-        public async void OnLoginCompleted(FacebookUser facebookUser, string message)
+        private void OnGoogleLogout()
         {
-            if (facebookUser != null)
-            {
-                Users.Picture = facebookUser.Picture;
-                Users.Name = facebookUser.FirstName;
-                Users.Email = facebookUser.Email;
-                FacebookUser = facebookUser;
-            }
-            else
-            {
-                await App.Current.MainPage.DisplayAlert("Error", message, "Ok");
-            }
+            _googleService?.Logout();
+            IsLogedIn = false;
         }
+
+        private void FacebookLogout()
+        {
+            _facebookService?.Logout();
+            IsLoggedIn = false;
+        }
+
+        #endregion
+
     }
 }

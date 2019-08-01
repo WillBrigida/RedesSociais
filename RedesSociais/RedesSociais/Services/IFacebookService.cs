@@ -7,7 +7,7 @@ namespace RedesSociais.Services
 {
     public interface IFacebookService
     {
-        void Login(Action<FacebookUser, string> onLoginComplete);
+        void Login(Action<Users, string> onLoginComplete);
         void Logout();
     }
 }

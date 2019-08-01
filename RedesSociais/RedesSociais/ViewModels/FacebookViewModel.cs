@@ -38,7 +38,7 @@ namespace RedesSociais.ViewModels
 
         private void FacebookLogin()
         {
-            _facebookService?.Login(OnLoginComplete);
+            //_facebookService?.Login(OnLoginComplete);
         }
 
         private void FacebookLogout()

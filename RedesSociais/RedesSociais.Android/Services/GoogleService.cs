@@ -16,7 +16,7 @@ namespace RedesSociais.Droid.Services
 {
     public class GoogleService : Java.Lang.Object, IGoogleService, GoogleApiClient.IConnectionCallbacks, GoogleApiClient.IOnConnectionFailedListener
     {
-        public Action<GoogleUser, string> _onLoginComplete;
+        public Action<Users, string> _onLoginComplete;
         public static GoogleApiClient _googleApiClient { get; set; }
         public static GoogleService Instance { get; private set; }
 
@@ -35,7 +35,7 @@ namespace RedesSociais.Droid.Services
                 .Build();
         }
 
-        public void Login(Action<GoogleUser, string> onLoginComplete)
+        public void Login(Action<Users, string> onLoginComplete)
         {
             _onLoginComplete = onLoginComplete;
             Intent signInIntent = Auth.GoogleSignInApi.GetSignInIntent(_googleApiClient);
@@ -54,11 +54,14 @@ namespace RedesSociais.Droid.Services
             {
 
                 GoogleSignInAccount accountt = result.SignInAccount;
-                _onLoginComplete?.Invoke(new GoogleUser()
+                _onLoginComplete?.Invoke(new Users
                 {
-                    Name = accountt.DisplayName,
+                    Id = accountt.Id,
+                    Token = accountt.IdToken,
+                    FirstName = accountt.GivenName,
+                    LastName = accountt.FamilyName,
                     Email = accountt.Email,
-                    Picture = new Uri((accountt.PhotoUrl != null ? $"{accountt.PhotoUrl}" : $"https://autisticdating.net/imgs/profile-placeholder.jpg"))
+                    Pic = new Uri((accountt.PhotoUrl != null ? $"{accountt.PhotoUrl}" : $"https://autisticdating.net/imgs/profile-placeholder.jpg"))
                 }, string.Empty);
             }
             else

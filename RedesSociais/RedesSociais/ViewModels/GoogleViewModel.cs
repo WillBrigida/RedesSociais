@@ -45,7 +45,7 @@ namespace RedesSociais.ViewModels
         #region MÉTODOS
         private void OnGoogleLogin()
         {
-            _googleService?.Login(OnLoginComplete);
+            //_googleService?.Login(OnLoginComplete);
         }
 
         private void OnGoogleLogout()

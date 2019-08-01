@@ -18,7 +18,7 @@ namespace RedesSociais.Droid.Services
     {
         public ICallbackManager CallbackManager;
 
-        Action<FacebookUser, string> _onLoginComplete;
+        Action<Users, string> _onLoginComplete;
 
         public FacebookService()
         {
@@ -27,7 +27,7 @@ namespace RedesSociais.Droid.Services
         }
 
         #region IFacebookManager
-        public void Login(Action<FacebookUser, string> OnLoginComplete)
+        public void Login(Action<Users, string> OnLoginComplete)
         {
             _onLoginComplete = OnLoginComplete;
             LoginManager.Instance.SetLoginBehavior(LoginBehavior.NativeWithFallback);
@@ -61,7 +61,6 @@ namespace RedesSociais.Droid.Services
                 bundle.PutString("fields", "id, first_name, email, last_name, picture.width(500).height(500)");
                 request.Parameters = bundle;
                 request.ExecuteAsync();
-                App.Current.MainPage.Navigation.PushAsync(new MainPage());
             }
         }
         #endregion
@@ -100,7 +99,7 @@ namespace RedesSociais.Droid.Services
                 }
             }
 
-            _onLoginComplete?.Invoke(new FacebookUser(id, AccessToken.CurrentAccessToken.Token, first_name, last_name, email, pictureUrl), null);
+            _onLoginComplete?.Invoke(new Users(id, AccessToken.CurrentAccessToken.Token, first_name, last_name, email, pictureUrl), null);
         }
         #endregion
     }

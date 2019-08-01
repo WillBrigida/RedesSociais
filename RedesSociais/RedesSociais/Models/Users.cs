@@ -12,6 +12,7 @@ namespace RedesSociais.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Picture { get; set; }
+        public Uri Pic { get; set; }
         public string Name { get; set; }
 
         public Users(string id, string token, string firstName, string lastName, string email, string imageUrl)
@@ -22,6 +23,10 @@ namespace RedesSociais.Models
             LastName = lastName;
             Email = email;
             Picture = imageUrl;
+        }
+        public Users()
+        {
+
         }
     }
 }

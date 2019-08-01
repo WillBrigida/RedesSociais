@@ -14,10 +14,9 @@ namespace RedesSociais.iOS.Services
 {
     public class FacebookService : IFacebookService
     {
-        public Action<FacebookUser, string> _onLoginComplete;
+        public Action<Users, string> _onLoginComplete;
 
-
-        public void Login(Action<FacebookUser, string> onLoginComplete)
+        public void Login(Action<Users, string> onLoginComplete)
         {
             _onLoginComplete = onLoginComplete;
             var window = UIApplication.SharedApplication.KeyWindow;
@@ -27,7 +26,7 @@ namespace RedesSociais.iOS.Services
                 vc = vc.PresentedViewController;
             }
 
-            var tcs = new TaskCompletionSource<FacebookUser>();
+            var tcs = new TaskCompletionSource<Users>();
             LoginManager manager = new LoginManager();
             manager.LogOut();
             manager.LoginBehavior = LoginBehavior.SystemAccount;
@@ -106,8 +105,8 @@ namespace RedesSociais.iOS.Services
                             }
                             if (tcs != null)
                             {
-                                tcs.TrySetResult(new FacebookUser(id, result.Token.TokenString, first_name, last_name, email, url));
-                                _onLoginComplete?.Invoke(new FacebookUser(id, result.Token.TokenString, first_name, last_name, email, url), string.Empty);
+                                tcs.TrySetResult(new Users(id, result.Token.TokenString, first_name, last_name, email, url));
+                                _onLoginComplete?.Invoke(new Users(id, result.Token.TokenString, first_name, last_name, email, url), string.Empty);
                             }
                         }
                     });

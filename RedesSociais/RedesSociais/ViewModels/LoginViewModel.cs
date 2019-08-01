@@ -1,10 +1,7 @@
 ﻿using RedesSociais.Models;
 using RedesSociais.Services;
 using RedesSociais.Views;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -14,35 +11,12 @@ namespace RedesSociais.ViewModels
     {
         #region ATRIBUTOS & PROPRIEDADES
 
-        private bool _isLogedIn;
-        public bool IsLogedIn
-        {
-            get { return _isLogedIn; }
-            set { SetProperty(ref _isLogedIn, value); }
-        }
-
-        private GoogleUser _googleUser;
-
-        public GoogleUser GoogleUser
-        {
-            get { return _googleUser; }
-            set { SetProperty(ref _googleUser, value); }
-        }
-
-        private FacebookUser _facebookUser;
-
-        public FacebookUser FacebookUser
-        {
-            get { return _facebookUser; }
-            set { SetProperty(ref _facebookUser, value); }
-        }
-
-
         #endregion
 
         #region VARIÁVEIS GLOBAIS
         readonly IGoogleService _googleService;
         readonly IFacebookService _facebookService;
+        readonly IRedeSocialService _redeSocialService;
         MainViewModel mainViewModel;
         #endregion
 
@@ -51,17 +25,16 @@ namespace RedesSociais.ViewModels
         {
             _googleService = DependencyService.Get<IGoogleService>();
             _facebookService = DependencyService.Get<IFacebookService>();
+            _redeSocialService = DependencyService.Get<IRedeSocialService>();
             mainViewModel = new MainViewModel();
-
-
         }
         #endregion
 
         #region COMMANDS
         public ICommand GoogleLoginCommand => new Command(OnGoogleLogin);
-        public ICommand GoogleLogoutCommand => new Command(OnGoogleLogout);
         public ICommand FacebookLoginCommand => new Command(FacebookLogin);
-        public ICommand FacebookLogoutCommand => new Command(FacebookLogout);
+
+
         #endregion
 
         #region MÉTODOS
@@ -70,52 +43,44 @@ namespace RedesSociais.ViewModels
             _googleService?.Login(OnLoginComplete);
         }
 
-        private void OnGoogleLogout()
-        {
-            _googleService?.Logout();
-            IsLogedIn = false;
-        }
 
-        private void OnLoginComplete(GoogleUser googleUser, string message)
-        {
-            if (googleUser != null)
-            {
-                GoogleUser = googleUser;
-                IsLogedIn = true;
-            }
-            else
-            {
-                App.Current.MainPage.DisplayAlert("Error", message, "Ok");
-            }
-        }
 
-       
-
-        private  void FacebookLogin()
-        {
-            _facebookService?.Login(mainViewModel.OnLoginCompleted);
-        }
-
-        private void FacebookLogout()
-        {
-            _facebookService?.Logout();
-            IsLogedIn = false;
-        }
-
-        //private async void OnLoginCompleted(FacebookUser facebookUser, string exception)
+        //private void OnLoginComplete(Users users, string message)
         //{
-        //    if (exception == null)
+        //    if (users != null)
         //    {
-        //        FacebookUser = facebookUser;
+        //        GoogleUser = googleUser;
         //        IsLogedIn = true;
-        //        await App.Current.MainPage.Navigation.PushAsync(new MainPage());
         //    }
         //    else
         //    {
-        //        Debug.WriteLine($"====={exception}=====");
-        //        await App.Current.MainPage.DisplayAlert("Error", exception, "OK");
+        //        App.Current.MainPage.DisplayAlert("Error", message, "Ok");
         //    }
         //}
+
+        private void FacebookLogin()
+        {
+            _facebookService?.Login(OnLoginComplete);
+        }
+
+
+        private async void OnLoginComplete(Users users, string exception)
+        {
+            if (string.IsNullOrEmpty(exception))
+            {
+                IsLoggedIn = true;
+                await App.Current.MainPage.Navigation.PushAsync(new MainPage());
+
+                Xamarin.Forms.MessagingCenter.Send(new Users(users.Id, users.Token, users.FirstName,
+                                                                      users.LastName, users.Email, users.Picture)
+                { Pic = users.Pic }, "login");
+            }
+            else
+            {
+                Debug.WriteLine($"====={exception}=====");
+                await App.Current.MainPage.DisplayAlert("Error", exception, "OK");
+            }
+        }
         #endregion
 
     }
